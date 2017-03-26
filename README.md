@@ -6,11 +6,11 @@
 
     filesFolder : 'server/files', // folder that is being watched
 
-    clearCacheOnChange : true,  // clear cached file if an it is changed in filesFolder
+    clearCacheOnChange : true,  // clear cached file if it's changed from filesFolder
 
-    clearCacheOnDelete : true,  // clear cached file if an it is deleted in filesFolder
+    clearCacheOnDelete : true,  // clear cached file if it's deleted from filesFolder
 
-    keepAspectRatio : true // Keep image aspect ration
+    keepAspectRatio : true // Keep image aspect ration when resizing
     
 1. use dockerfile for build (docker build -t own .)
 2. docker run -p externPort:9010 own
