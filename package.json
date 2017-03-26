@@ -1,0 +1,12 @@
+{
+  "name": "own",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "dependencies": {
+    "chokidar": "^1.6.1",
+    "express": "~4.0.0",
+    "sharp": "^0.17.2"
+  }
+}
