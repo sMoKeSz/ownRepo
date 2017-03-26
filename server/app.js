@@ -5,6 +5,8 @@
 var express = require('express');
 var http = require('http');
 
+var cluster = require('cluster');
+var numCPUs = require('os').cpus().length;
 
 
 //it can be set to environment if i had more configs :)
@@ -14,14 +16,39 @@ var app = express();
 //create the magic server
 var server = http.createServer(app);
 
+//high load
+if (cluster.isMaster) {
 
-//inject the route
-app.use('/api/image', require('./api/image'));
+    for (var i = 0; i < numCPUs; i++) {
+        // Create a worker
+        cluster.fork();
+    }
 
-//check port
-var port = config.port ? config.port : 9010;
+    // restart slave if it dies :(
+    cluster.on('exit', function (worker, code, signal) {
+        cluster.fork();
+    });
 
-//starting server
-server.listen(port, function () {
-    console.log('We are up and running on ', config.port);
-});
+    cluster.on('online', function(worker) {
+        console.log('Slave ' + worker.process.pid + ' is up!');
+    });
+} else {
+
+    //inject the route
+    app.use('/api/image', require('./api/image'));
+
+    //check port
+    var port = config.port ? config.port : 9010;
+
+    //starting slave
+    server.listen(port, function () {
+
+    });
+
+    // just to be safe :)
+    process.on('uncaughtException', function (err) {
+        console.log('Threw Exception: ', err.message);
+        console.log(err.stack);
+    });
+}
+
