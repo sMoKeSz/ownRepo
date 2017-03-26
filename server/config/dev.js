@@ -7,7 +7,7 @@
  * @PORT - APPLICATION PORT*/
 module.exports = {
     port : 9010,
-    cacheTime : 30000,
+    cacheTime : 600000,
     filesFolder : 'server/files',
     clearCacheOnChange : true,
     clearCacheOnDelete : true,

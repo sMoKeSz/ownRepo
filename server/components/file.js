@@ -20,7 +20,7 @@ function TheWatcher(folder) {
     this.miss = 0;
 }
 /**
- * //Initialize watcher
+ * //Init watcher
  * //Register Events
  * **/
 TheWatcher.prototype.watch = function () {
@@ -53,28 +53,26 @@ TheWatcher.prototype.registerEvents = function () {
         self.watch();
     });
 
-    //file added
+    //on file added, add path to files
     this.watcher.on('add', function (path) {
         var filename = path.replace(/^.*[\\\/]/, '');
         self.files[filename] = path;
     });
 
-    //file changed
+    //file changed remove it from cache if necesary
     this.watcher.on('change', function (path) {
         var filename = path.replace(/^.*[\\\/]/, '');
         if (config.clearCacheOnChange) {
            delete self.cachedFiles[filename] ;
         }
-        console.log('changed ' + filename);
     });
 
-    //file removed
+    //file removed it from cache if necesary
     this.watcher.on('unlink', function (path) {
         var filename = path.replace(/^.*[\\\/]/, '');
         if (config.clearCacheOnDelete) {
             delete self.cachedFiles[filename] ;
         }
-        console.log('removed ' + filename);
     })
 };
 
