@@ -4,7 +4,7 @@
 
 /**
  * CONFIGS
- * @PORT - APPLICATION PORT*/
+ */
 module.exports = {
     port : 9010,
     cacheTime : 600000,
