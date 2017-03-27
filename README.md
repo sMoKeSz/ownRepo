@@ -2,6 +2,10 @@
 
 second branch(cluster) for node clustering
 
+API :
+    1. /api/image/:imageName (with query param size for resolution)
+    2. /api/image/stats (statistics for images)
+
 0. Check config file :
     port : 9010,  // set port
 
