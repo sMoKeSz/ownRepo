@@ -1,4 +1,6 @@
 # ownRepo
+# second branch(cluster) for node clustering
+
 0. Check config file :
     port : 9010,  // set port
 
